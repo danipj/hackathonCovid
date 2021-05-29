@@ -28,6 +28,37 @@
   color: #61dafb;
 }
 
+.video{
+  height:200px;
+  width: 200px;
+  background-color: black;
+  margin:auto
+}
+
+$deslocamento: -50px;
+.post{
+  width: 300px;
+  border: 1px black solid;
+  margin: 15px auto;
+  position: relative;
+  &-familiar{
+    @extend .post;
+    margin-right: $deslocamento;
+    background-color: #61dafb;
+  }
+  &-paciente{
+    @extend .post;
+    margin-left: $deslocamento;
+    background-color: #90ee90;
+  }
+}
+.feed{
+  margin: auto;
+  width: 250px;
+  //border: 1px black solid;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
