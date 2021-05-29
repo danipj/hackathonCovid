@@ -1,55 +1,48 @@
-import { Component } from "react";
+import { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import Post from './Post';
 
-class Feed extends Component {
-    
-    posts = [
-        <Post type={"familiar"} message={"Oi meu amor, por aqui tudo bem! A Maria e a Naomi mandam melhoras. Beijo"}  hasVideo={false}/>,
-        <Post type={"paciente"} message={"Tudo bem por aqui, estou me sentindo melhor."}  hasVideo={false}/>,
-        <Post type={"paciente"} message={"Audio 0:39"}  hasVideo={false}/>,
-        <Post type={"familiar"} message={''} hasVideo={true}/>,
-    ]
-
-    constructor(){
-      super()
-      let type="";
-      for (let index = 0; index < 5; index++) {
-        if(index%2!==0){
-          type="paciente"
-        }
-        else{
-          type = "familiar"
-        }
-        this.posts.push(<Post type={type} message={"Lorem ipsum lorem ipsum pacas blablabla etcetecetec"}  hasVideo={false}/>);
-      }
-      this.state = {posts:this.posts}
+function Feed() {
+  const [value, setValue] = useState('');
+  
+  let mock = [
+    <Post type={"familiar"} message={"Oi meu amor, por aqui tudo bem! A Maria e a Naomi mandam melhoras. Beijo"}  hasVideo={false}/>,
+    <Post type={"paciente"} message={"Tudo bem por aqui, estou me sentindo melhor."}  hasVideo={false}/>,
+    <Post type={"paciente"} message={"Audio 0:39"}  hasVideo={false}/>,
+    <Post type={"familiar"} message={''} hasVideo={true}/>,
+  ]
+  
+  let type="";
+  for (let index = 0; index < 5; index++) {
+    if(index%2!==0){
+      type="paciente"
     }
-
-    handleChange(event) {
-      this.setState({value: event.target.value});  
+    else{
+      type = "familiar"
     }
+    mock = [...mock,<Post type={type} message={"Lorem ipsum lorem ipsum pacas blablabla etcetecetec"}  hasVideo={false}/>];
+  }
+  const [posts, setPosts] = useState(mock);
 
-    sendMessage(){
-      let message = this.state.value
-      let type = "familiar"
-      this.setState({posts:[<Post type={type} message={message}  hasVideo={false}/>, ...this.state.posts], value:''})
-    }
+  function sendMessage(){
+    let message = value
+    let type = "familiar"
+    setPosts([<Post type={type} message={message}  hasVideo={false}/>, ...posts])
+    setValue('')
+  }
 
-    render(){
-      return(
-        <div className="feed">
-          <Form>
-            <FormGroup>
-              <Label for="exampleText">Envie mensagem</Label>
-              <Input type="textarea" name="text" id="exampleText" value={this.state.value} onChange={(e)=>this.handleChange(e)}/>
-            </FormGroup>
-            <Button onClick={()=>this.sendMessage()}>Enviar</Button>
-          </Form>
-          { this.state.posts }
-        </div>
-        )
-      }
+  return(
+    <div className="feed">
+      <Form>
+        <FormGroup>
+          <Label for="exampleText">Envie mensagem</Label>
+          <Input type="textarea" name="text" id="exampleText" value={value} onChange={(e)=>setValue(e.target.value)}/>
+        </FormGroup>
+        <Button onClick={()=>sendMessage()}>Enviar</Button>
+      </Form>
+      { posts }
+    </div>
+    )
 }
 
 export default Feed
