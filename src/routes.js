@@ -3,6 +3,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 import Feed from './Feed';
 import MenuHospital from './MenuHospital';
+import Paciente from './Paciente';
 import Prontuario from './Prontuario';
 
 const Main = () => {
@@ -11,6 +12,7 @@ const Main = () => {
       <Route exact path='/' component={Feed}></Route>
       <Route exact path='/prontuario' component={Prontuario}></Route>
       <Route exact path='/menu' component={MenuHospital}></Route>
+      <Route  path='/paciente/:id' component={Paciente}></Route>
     </Switch>
   );
 }
