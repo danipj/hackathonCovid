@@ -13,7 +13,7 @@ function Prontuario(){
 
     return(<React.Fragment>
         <div className="ellipse blue"></div>
-        <h1 className="title">PRONTUARIO AFETIVO</h1>
+        <h1 className="title">PRONTUÁRIO AFETIVO</h1>
         <div className="feed">
             {dados}
         </div>

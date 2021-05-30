@@ -9,6 +9,7 @@ import {
   NavLink,
 } from 'reactstrap';
 import Main from './routes';
+import Menu from './Menu';
 
 function App(){
   let isOpen = true;
@@ -16,20 +17,7 @@ function App(){
     return (
       <div className="App">
         <Main />
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Feed do paciente</NavbarBrand>
-          <NavbarToggler />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink href="/prontuario/">Prontuário afetivo</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/menu">Menu do hospital</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+        <Menu />
         </div>
     );
 }
