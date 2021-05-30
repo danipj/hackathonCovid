@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import React,{ useState } from "react";
+import { Button, Input } from 'reactstrap';
 import Post from './Post';
 
 function Feed() {
-  const [value, setValue] = useState('');
+  const [message, setMessage] = useState('');
+  const [sender, setSender] = useState('');
+  const [isInputOpen, setInputOpen] = useState(false);
   
   let mock = [
     <Post type={"familiar"} message={"Oi meu amor, por aqui tudo bem! A Maria e a Naomi mandam melhoras. Beijo"}  hasVideo={false}/>,
@@ -25,23 +27,27 @@ function Feed() {
   const [posts, setPosts] = useState(mock);
 
   function sendMessage(){
-    let message = value
     let type = "familiar"
     setPosts([<Post type={type} message={message}  hasVideo={false}/>, ...posts])
-    setValue('')
+    setMessage('')
+    setInputOpen(false)
   }
 
-  return(
+  return(<React.Fragment>
+    <div className="ellipse"></div>
+    <h1 className="title">MURAL</h1>
+    {isInputOpen?
+      <div className="input-feed">
+        <Input placeholder="Quem está enviando a mensagem?" type="text" value={sender} onChange={(e)=>setSender(e.target.value)}/>
+        <Input placeholder="Deixe sua mensagem" type="textarea" value={message} onChange={(e)=>setMessage(e.target.value)}/>
+        <Button className="button-send" onClick={()=>sendMessage()}>ENVIAR</Button>
+      </div>:
+      <div className="input-closed" onClick={()=>setInputOpen(true)}>Deixe sua mensagem</div>
+    }
     <div className="feed">
-      <Form>
-        <FormGroup>
-          <Label for="exampleText">Envie mensagem</Label>
-          <Input type="textarea" name="text" id="exampleText" value={value} onChange={(e)=>setValue(e.target.value)}/>
-        </FormGroup>
-        <Button onClick={()=>sendMessage()}>Enviar</Button>
-      </Form>
       { posts }
     </div>
+    </React.Fragment>
     )
 }
 

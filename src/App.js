@@ -15,6 +15,7 @@ function App(){
   
     return (
       <div className="App">
+        <Main />
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">Feed do paciente</NavbarBrand>
           <NavbarToggler />
@@ -29,7 +30,6 @@ function App(){
             </Nav>
           </Collapse>
         </Navbar>
-        <Main />
         </div>
     );
 }
