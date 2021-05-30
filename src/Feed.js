@@ -8,25 +8,27 @@ function Feed() {
 
   useEffect(() => {
     const apiUrl = 'http://127.0.0.1:5000/feed/12314';
-    fetch(apiUrl,{mode: 'no-cors'})
-      .then((res) =>res.json())
+    fetch(apiUrl)
+      .then((res) => res.json())
       .then((posts) => {
-        console.log(posts);
-        setPosts(posts.map((p)=>
-          <Post type={p.origin} message={p.text}  hasVideo={false}/>));
+        const createdPosts = []
+        posts.response.forEach((p, i)=> {
+          p = JSON.parse(p)
+          createdPosts.push(<Post type={p.origin} message={p.text}  hasVideo={false} key={i}/>)
+        })
+        setPosts(createdPosts);
       });
   }, [setPosts]);
 
     async function sendMessageToAPI(text){
       
       const rawResponse = await fetch('http://127.0.0.1:5000/message', {
-        mode:'no-cors',
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"patientId": 12314, "text": text, "createdAt": new Date().toISOString(), "origin": "patient", "author":"Paciente De Tal"})
+        body: JSON.stringify({"patientId": 12314, "text": text, "createdAt": new Date().toISOString(), "origin": "patient", "author":"Agora Vai"})
       });
       const content = await rawResponse.json();
   }
