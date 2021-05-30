@@ -46,7 +46,7 @@ $deslocamento: -50px;
     margin-right: $deslocamento;
     background-color: #61dafb;
   }
-  &-paciente{
+  &-patient{
     @extend .post;
     margin-left: $deslocamento;
     background-color: #90ee90;
